@@ -108,7 +108,7 @@ def go(config: DictConfig):
                 os.path.join(root_path, 'src', 'train_random_forest'),
                 'main',
                 parameters={
-                    'trainval_artifact': 'myc_airbnb/trainval_data.csv:latest',
+                    'trainval_artifact': 'nyc_airbnb/trainval_data.csv:latest',
                     'val_size': config['modeling']['val_size'],
                     'random_seed': config['modeling']['random_seed'],
                     'stratify_by': config['modeling']['stratify_by'],
@@ -121,10 +121,14 @@ def go(config: DictConfig):
             pass
 
         if "test_regression_model" in active_steps:
-
-            ##################
-            # Implement here #
-            ##################
+            _ = mlflow.run(
+                f"{config['main']['components_repository']}/train_val_test_split",
+                'main',
+                parameters={
+                    'mlflow_model': 'nyc_airbnb/random_forest_export:prod',
+                    'test_dataset': 'nyc_airbnb/test_data.csv:latest'
+                }
+            )
 
             pass
 
