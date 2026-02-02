@@ -57,7 +57,7 @@ def go(config: DictConfig):
                 'main',
                 parameters = {
                     'input_artifact': 'nyc_airbnb/sample.csv:latest',
-                    'output_artifact': 'clean_sample.csv',
+                    'output_artifact': 'clean_data.csv',
                     'output_type': 'cleaned_data',
                     'output_description': 'cleaned data - removed outliers and datetimes converted',
                     'min_price': config['etl']['min_price'],
